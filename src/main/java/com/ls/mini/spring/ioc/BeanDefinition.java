@@ -45,7 +45,7 @@ public class BeanDefinition {
         }
     }
 
-    private PropertyValues propertyValues;//封装构建bean时所需的属性
+    private PropertyValues propertyValues = new PropertyValues();//封装构建bean时所需的属性，需要进行初始化
 
     public PropertyValues getPropertyValues() {
         return propertyValues;

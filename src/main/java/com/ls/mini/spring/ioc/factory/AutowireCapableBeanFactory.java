@@ -12,6 +12,8 @@ import java.lang.reflect.Field;
  * 把创建对象bean的过程进行分离
  * 1、创建对象
  * 2、设置bean的属性
+ *
+ * 可自动装配内容的BeanFactory
  */
 public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     @Override

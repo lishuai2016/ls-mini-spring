@@ -12,10 +12,14 @@
 
 > v1
 
+新增：
+
 简单模拟通过容器注册和获得bean的过程
 
 
 > v2
+
+新增：
 
 模拟抽象spring的工厂类
 
@@ -27,5 +31,19 @@
 
 > v3
 
+新增：
+
 在BeanDefinition中新增PropertyValues字段，封装了构建bean的一些属性，用于bean的初始化。在com.ls.mini.spring.ioc.factory.AutowireCapableBeanFactory.doCreateBean中，
 把实例化bean，分为两步：1、创建对象；2、设置bean的属性
+
+> v4
+
+新增：
+
+一个是资源定位Resource接口以及对应的实现类
+
+一个是从resource定位的配置文件中读取bean的配置的接口BeanDefinitionReader，生成BeanDefinition
+
+主要实现了从xml配置文件解析配置的bean信息，生成BeanDefinition并注册到bean的容器中。
+
+
