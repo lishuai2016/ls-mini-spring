@@ -100,6 +100,9 @@
 
 > v8:invite-pointcut-and-aspectj
 
+引入jar：aspectjweaver
+
+接入BeanPostProcessor 初始化扩展接口以及通过expressin表达式匹配类或者方法的joinpoint
 
 
 > v9:auto-create-aop-proxy

@@ -1,6 +1,7 @@
 package com.ls.mini.spring.ioc.beans.factory;
 
 import com.ls.mini.spring.ioc.beans.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.BeanPostProcessor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,6 +25,7 @@ public abstract class AbstractBeanFactory implements BeanFactory{
 
     private final List<String> beanDefinitionNames = new ArrayList<String>();//即可工厂中的所有已经注册bean的名称
 
+    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();//对bean初始化的拦截操作
 
     /**
      * 这里可以实现懒加载
@@ -39,11 +41,23 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         }
         Object bean = beanDefinition.getBean();//在这里没有实力话，再进行实例的创建
         if (bean == null) {
-            bean = doCreateBean(beanDefinition);
+            bean = doCreateBean(beanDefinition);//创建一个bean实例，并设置bean的属性字段
+            initializeBean(bean,name);//对bean进行初始化处理
         }
         return bean;
     }
 
+    //
+    protected void initializeBean(Object bean, String name) throws Exception {
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessBeforeInitialization(bean, name);
+        }
+
+        // TODO:call initialize method
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessAfterInitialization(bean, name);
+        }
+    }
 
     //注册bean的接口保留在这里
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
@@ -62,10 +76,37 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         }
     }
 
-    /**
-     * 初始化bean
-     * @param beanDefinition
-     * @return
-     */
-    protected abstract Object doCreateBean(BeanDefinition beanDefinition) throws Exception;
+    protected Object doCreateBean(BeanDefinition beanDefinition) throws Exception {
+        Object bean = createBeanInstance(beanDefinition);
+        beanDefinition.setBean(bean);
+        //设置对象到beanDefinition中去   懒加载，在get的时候才进行设值，之前是在注册的时候实例化设置的
+        //在这里通过实例化一个没有初始化属性的bean到beanDefinition，解决了循环引用问题？？？
+        applyPropertyValues(bean,beanDefinition);
+        return bean;
+    }
+
+    protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
+        return beanDefinition.getBeanClass().newInstance();//根据类对象构建一个无参数的实例
+    }
+
+    //让子类去实现，对bean设置属性（放在这里不可以吗？？？？）
+    protected void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
+
+    }
+
+    //添加BeanPostProcessor实例，对bean进行初始化处理
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) throws Exception {
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    //获取指定类型所有bean实例
+    public List getBeansForType(Class type) throws Exception {
+        List beans = new ArrayList<Object>();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            if (type.isAssignableFrom(beanDefinitionMap.get(beanDefinitionName).getBeanClass())) {
+                beans.add(getBean(beanDefinitionName));
+            }
+        }
+        return beans;
+    }
 }

@@ -23,11 +23,11 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
     public ClassPathXmlApplicationContext(String configLocation, AbstractBeanFactory beanFactory) throws Exception {
         super(beanFactory);
         this.configLocation = configLocation;
-        refresh();//在构造函数中调用refresh函数，这里的作用是读取配置文件的信息注册BeanDefinition到beanFactory
+        refresh();//调用父类的模板方法，初始化容器中的bean 单例对象
     }
 
     @Override
-    public void refresh() throws Exception {
+    protected void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception {
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
         xmlBeanDefinitionReader.loadBeanDefinitions(configLocation);
         for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
