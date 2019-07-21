@@ -18,14 +18,14 @@
 考虑到 AspectJ 语法仅用于实现 execution("***") 部分的解析，不是主要内容，
 也可以使用 Java 的正则表达式粗略地完成，因此没有关注这些细节。
 
-> v1
+> v1:container-register-and-get
 
 新增：
 
 简单模拟通过容器注册和获得bean的过程
 
 
-> v2
+> v2:abstract-beanfactory-and-do-bean-initilizing-in-it
 
 新增：
 
@@ -37,14 +37,14 @@
 
 - 一个工厂的默认实现AutowireCapableBeanFactory: [实现了模板方法doCreateBean，根据beanDefinition中的类对象，构建一个实例对象]
 
-> v3
+> v3:inject-bean-with-property
 
 新增：
 
 在BeanDefinition中新增PropertyValues字段，封装了构建bean的一些属性，用于bean的初始化。在com.ls.mini.spring.ioc.factory.AutowireCapableBeanFactory.doCreateBean中，
 把实例化bean，分为两步：1、创建对象；2、设置bean的属性
 
-> v4
+> v4:config-beanfactory-with-xml
 
 新增：
 
@@ -54,7 +54,7 @@
 
 主要实现了从xml配置文件解析配置的bean信息，生成BeanDefinition并注册到bean的容器中。
 
-> v5
+> v5:inject-bean-to-bean
 
 新增：
 
@@ -81,11 +81,32 @@
 这样出现依赖的对象之间获得对方的实例，不是完全的属性也初始化完毕，这样就避免了循环依赖的问题。
 
 
-> v6
+> v6:invite-application-context
 
 调整包结构
 
 新增接口ApplicationContext、AbstractApplicationContext、ClassPathXmlApplicationContext
 
 
+> v7:method-interceptor-by-jdk-dynamic-proxy
 
+引入了jar包：aopalliance
+
+编写项目中aop包下的jdk动态代理，依赖于下面的两个接口
+
+- org.aopalliance.intercept.MethodInterceptor
+
+- org.aopalliance.intercept.MethodInvocation
+
+> v8:invite-pointcut-and-aspectj
+
+
+
+> v9:auto-create-aop-proxy
+
+
+
+
+
+
+> V10:invite-cglib-and-aopproxy-factory
