@@ -11,11 +11,38 @@ public class BeanDefinition {
 
     private Object bean; //封装的bean对象
 
-    public BeanDefinition(Object bean) {
-        this.bean = bean;
-    }
+    private Class beanClass;//类对象
+
+    private String beanClassName;//对应类的名称，全限定名称
 
     public Object getBean() {
         return bean;
+    }
+
+    public void setBean(Object bean) {
+        this.bean = bean;
+    }
+
+    public Class getBeanClass() {
+        return beanClass;
+    }
+
+    public void setBeanClass(Class beanClass) {
+        this.beanClass = beanClass;
+    }
+
+    public String getBeanClassName() {
+        return beanClassName;
+    }
+
+    public void setBeanClassName(String beanClassName) {//通过全限定名来获得类对象
+        this.beanClassName = beanClassName;
+
+        try {
+            beanClass = Class.forName(beanClassName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
