@@ -7,7 +7,13 @@ package com.ls.mini.spring.ioc;
  */
 public class HelloWorldService {
 
+    private String text;
+
     public void helloWorld(){
-        System.out.println("Hello World!");
+        System.out.println(text);
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

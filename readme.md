@@ -10,17 +10,22 @@
 
 # 版本说明
 
-- v1
+> v1
 
 简单模拟通过容器注册和获得bean的过程
 
 
-- v2
+> v2
 
 模拟抽象spring的工厂类
 
-定义了工厂接口BeanFactory：[抽象的工厂接口，定义了通过工厂获得bean和注册bean的方法],
+- 定义了工厂接口BeanFactory：[抽象的工厂接口，定义了通过工厂获得bean和注册bean的方法],
 
-一个抽象类AbstractBeanFactory：[实现了获得bean和注册bean的逻辑，通过一个map来维护bean信息,使用模板方法，定义一个抽象的创建bean的抽象方法doCreateBean]
+- 一个抽象类AbstractBeanFactory：[实现了获得bean和注册bean的逻辑，通过一个map来维护bean信息,使用模板方法，定义一个抽象的创建bean的抽象方法doCreateBean]
 
-一个工厂的默认实现AutowireCapableBeanFactory: [实现了模板方法doCreateBean，根据beanDefinition中的类对象，构建一个实例对象]
+- 一个工厂的默认实现AutowireCapableBeanFactory: [实现了模板方法doCreateBean，根据beanDefinition中的类对象，构建一个实例对象]
+
+> v3
+
+在BeanDefinition中新增PropertyValues字段，封装了构建bean的一些属性，用于bean的初始化。在com.ls.mini.spring.ioc.factory.AutowireCapableBeanFactory.doCreateBean中，
+把实例化bean，分为两步：1、创建对象；2、设置bean的属性
