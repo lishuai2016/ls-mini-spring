@@ -8,8 +8,8 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-
     <bean id="outputService" class="com.ls.mini.spring.ioc.OutputServiceImpl">
+
     </bean>
 
     <bean id="helloWorldService" class="com.ls.mini.spring.ioc.HelloWorldServiceImpl">
@@ -17,13 +17,7 @@
         <property name="outputService" ref="outputService"></property>
     </bean>
 
-    <bean id="timeInterceptor" class="com.ls.mini.spring.ioc.aop.TimerInterceptor"></bean>
-
-    <bean id="autoProxyCreator" class="com.ls.mini.spring.ioc.aop.AspectJAwareAdvisorAutoProxyCreator"></bean>
-
-    <bean id="aspectjAspect" class="com.ls.mini.spring.ioc.aop.AspectJExpressionPointcutAdvisor">
-        <property name="advice" ref="timeInterceptor"></property>
-        <property name="expression" value="execution(* com.ls.mini.spring.ioc.*.*(..))"></property>
+    <bean id="beanInitializeLogger" class="com.ls.mini.spring.ioc.BeanInitializeLogger">
     </bean>
 
 </beans>

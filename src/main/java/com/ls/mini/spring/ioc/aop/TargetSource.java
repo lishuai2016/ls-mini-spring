@@ -8,16 +8,16 @@ package com.ls.mini.spring.ioc.aop;
  * 被代理的对象
  */
 public class TargetSource {
-    private Class targetClass;//被代理对象的类型
+    private Class<?>[] targetClass;//接口数组
 
     private Object target;
 
-    public TargetSource(Object target, Class<?> targetClass) {
+    public TargetSource(Object target, Class<?>... targetClass) {
         this.target = target;
         this.targetClass = targetClass;
     }
 
-    public Class getTargetClass() {
+    public Class<?>[] getTargetClass() {
         return targetClass;
     }
 

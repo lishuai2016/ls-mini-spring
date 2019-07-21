@@ -58,7 +58,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     }
     // 把配置文件的Element 元素 封装成
     protected void processBeanDefinition(Element ele) {
-        String name = ele.getAttribute("name");
+        String name = ele.getAttribute("id");
         String className = ele.getAttribute("class");
         BeanDefinition beanDefinition = new BeanDefinition();
         processProperty(ele,beanDefinition);//处理属性标签
@@ -66,19 +66,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         getRegistry().put(name, beanDefinition);//注册beanDefinition
     }
 
-    //上一版本v4中bean的普通属性的解析
-//    private void processProperty(Element ele,BeanDefinition beanDefinition) {
-//        NodeList propertyNode = ele.getElementsByTagName("property");
-//        for (int i = 0; i < propertyNode.getLength(); i++) {
-//            Node node = propertyNode.item(i);
-//            if (node instanceof Element) {
-//                Element propertyEle = (Element) node;
-//                String name = propertyEle.getAttribute("name");
-//                String value = propertyEle.getAttribute("value");
-//                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
-//            }
-//        }
-//    }
+
 
     //带有引用属性的解析
     private void processProperty(Element ele, BeanDefinition beanDefinition) {
