@@ -10,6 +10,14 @@
 
 # 版本说明
 
+- 第一部分 IoC 容器的实现 对应了 tiny-spring 的 v1 到 v5 部分，这 5 个 step 实现了基本的 IoC 容器，
+支持singleton类型的bean，包括初始化、属性注入、以及依赖 Bean 注入，可从 XML 中读取配置，XML 读取方式没有具体深入。
+
+- 第二部分 AOP 容器的实现 对应了 tiny-spring 的 step-6 到 step-9 部分。step-10 中对 cglib 的支持没有分析。
+这 4 个 step 可以使用 AspectJ 的语法进行 AOP 编写，支持接口代理。
+考虑到 AspectJ 语法仅用于实现 execution("***") 部分的解析，不是主要内容，
+也可以使用 Java 的正则表达式粗略地完成，因此没有关注这些细节。
+
 > v1
 
 新增：
