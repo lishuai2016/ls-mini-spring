@@ -2,6 +2,7 @@ package com.ls.mini.spring.ioc.xml;
 
 import com.ls.mini.spring.ioc.AbstractBeanDefinitionReader;
 import com.ls.mini.spring.ioc.BeanDefinition;
+import com.ls.mini.spring.ioc.BeanReference;
 import com.ls.mini.spring.ioc.PropertyValue;
 import com.ls.mini.spring.ioc.io.Resource;
 import com.ls.mini.spring.ioc.io.ResourceLoader;
@@ -47,7 +48,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     }
 
     protected void parseBeanDefinitions(Element root) {
-        NodeList nl = root.getChildNodes();
+        NodeList nl = root.getChildNodes();//拿到的是根标签下的所有子标签列表
         for (int i = 0; i < nl.getLength(); i++) {
             Node node = nl.item(i);
             if (node instanceof Element) {
@@ -66,15 +67,40 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         getRegistry().put(name, beanDefinition);//注册beanDefinition
     }
 
-    private void processProperty(Element ele,BeanDefinition beanDefinition) {
+    //上一版本v4中bean的普通属性的解析
+//    private void processProperty(Element ele,BeanDefinition beanDefinition) {
+//        NodeList propertyNode = ele.getElementsByTagName("property");
+//        for (int i = 0; i < propertyNode.getLength(); i++) {
+//            Node node = propertyNode.item(i);
+//            if (node instanceof Element) {
+//                Element propertyEle = (Element) node;
+//                String name = propertyEle.getAttribute("name");
+//                String value = propertyEle.getAttribute("value");
+//                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
+//            }
+//        }
+//    }
+
+    //带有引用属性的解析
+    private void processProperty(Element ele, BeanDefinition beanDefinition) {
         NodeList propertyNode = ele.getElementsByTagName("property");
         for (int i = 0; i < propertyNode.getLength(); i++) {
             Node node = propertyNode.item(i);
             if (node instanceof Element) {
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
-                String value = propertyEle.getAttribute("value");
-                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
+                String value = propertyEle.getAttribute("value");//如果有value标签，且有值，则为普通的属性
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else { //在解析是否为ref属性
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref == null || ref.length() == 0) {
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
+                                + name + "' must specify a ref or value");
+                    }
+                    BeanReference beanReference = new BeanReference(ref);//封装引用类的名称，这里并没有实例化被引用的类
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                }
             }
         }
     }

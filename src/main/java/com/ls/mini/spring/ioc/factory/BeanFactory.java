@@ -10,6 +10,6 @@ import com.ls.mini.spring.ioc.BeanDefinition;
  * 抽象的工厂接口，定义了通过工厂获得bean和注册bean的方法
  */
 public interface BeanFactory {
-     Object getBean(String name);
+     Object getBean(String name) throws Exception;
      void registerBeanDefinition(String name,BeanDefinition beanDefinition) throws Exception;
 }

@@ -46,4 +46,28 @@
 
 主要实现了从xml配置文件解析配置的bean信息，生成BeanDefinition并注册到bean的容器中。
 
+> v5
 
+新增：
+
+容器bean的懒加载机制，在初始化的时候仅仅是解析配置文件的信息到BeanDefinition然后注册到map中，
+此时，并没有实例化BeanDefinition中的bean，在使用getbean的时候，会首先判断BeanDefinition是否注册，
+没有的话报错，假如注册过的话，在检测BeanDefinition.getbean是否已经实例化了，没有的话进行实例化；
+
+备注：这里面也出现了循环引用的问题。
+
+比如：
+```xml
+
+    <bean name="outputService" class="com.ls.mini.spring.ioc.OutputService">
+        <property name="helloWorldService" ref="helloWorldService"></property>
+    </bean>
+
+    <bean name="helloWorldService" class="com.ls.mini.spring.ioc.HelloWorldService">
+        <property name="text" value="Hello World!"></property>
+        <property name="outputService" ref="outputService"></property>
+    </bean>
+```
+
+这里的解决方式是，在通过类构建实例的时候，还没有初始化属性时，把bean对象设置到BeanDefinition中，
+这样出现依赖的对象之间获得对方的实例，不是完全的属性也初始化完毕，这样就避免了循环依赖的问题。
