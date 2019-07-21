@@ -1,5 +1,7 @@
-package com.ls.mini.spring.ioc.io;
+package com.ls.mini.spring.ioc.beans.io;
 
+import com.ls.mini.spring.ioc.beans.io.Resource;
+import com.ls.mini.spring.ioc.beans.io.ResourceLoader;
 import org.junit.Assert;
 import org.junit.Test;
 

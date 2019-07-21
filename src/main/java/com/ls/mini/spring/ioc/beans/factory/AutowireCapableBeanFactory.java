@@ -1,8 +1,8 @@
-package com.ls.mini.spring.ioc.factory;
+package com.ls.mini.spring.ioc.beans.factory;
 
-import com.ls.mini.spring.ioc.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.BeanDefinition;
 import com.ls.mini.spring.ioc.BeanReference;
-import com.ls.mini.spring.ioc.PropertyValue;
+import com.ls.mini.spring.ioc.beans.PropertyValue;
 
 import java.lang.reflect.Field;
 
@@ -31,14 +31,6 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
         return beanDefinition.getBeanClass().newInstance();//根据类对象构建一个无参数的实例
     }
 
-    //给对象设置属性信息
-//    protected void applyPropertyValues(Object bean, BeanDefinition mbd) throws Exception {
-//        for (PropertyValue propertyValue : mbd.getPropertyValues().getPropertyValues()) {
-//            Field declaredField = bean.getClass().getDeclaredField(propertyValue.getName());//根据字段名获得字段的信息
-//            declaredField.setAccessible(true);
-//            declaredField.set(bean, propertyValue.getValue());//设置字段的值
-//        }
-//    }
 
     protected void applyPropertyValues(Object bean, BeanDefinition mbd) throws Exception {
         for (PropertyValue propertyValue : mbd.getPropertyValues().getPropertyValues()) {

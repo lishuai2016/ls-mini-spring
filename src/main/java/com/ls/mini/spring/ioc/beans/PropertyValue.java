@@ -1,4 +1,4 @@
-package com.ls.mini.spring.ioc;
+package com.ls.mini.spring.ioc.beans;
 
 /**
  * @program: ls-mini-spring

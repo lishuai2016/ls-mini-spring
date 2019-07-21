@@ -1,10 +1,10 @@
 package com.ls.mini.spring.ioc;
 
-import com.ls.mini.spring.ioc.factory.AbstractBeanFactory;
-import com.ls.mini.spring.ioc.factory.AutowireCapableBeanFactory;
-import com.ls.mini.spring.ioc.factory.BeanFactory;
-import com.ls.mini.spring.ioc.io.ResourceLoader;
-import com.ls.mini.spring.ioc.xml.XmlBeanDefinitionReader;
+import com.ls.mini.spring.ioc.beans.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.factory.AbstractBeanFactory;
+import com.ls.mini.spring.ioc.beans.factory.AutowireCapableBeanFactory;
+import com.ls.mini.spring.ioc.beans.io.ResourceLoader;
+import com.ls.mini.spring.ioc.beans.xml.XmlBeanDefinitionReader;
 import org.junit.Test;
 
 import java.util.Map;

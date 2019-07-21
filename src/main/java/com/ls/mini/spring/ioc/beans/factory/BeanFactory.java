@@ -1,6 +1,6 @@
-package com.ls.mini.spring.ioc.factory;
+package com.ls.mini.spring.ioc.beans.factory;
 
-import com.ls.mini.spring.ioc.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.BeanDefinition;
 
 /**
  * @program: ls-mini-spring
@@ -11,5 +11,4 @@ import com.ls.mini.spring.ioc.BeanDefinition;
  */
 public interface BeanFactory {
      Object getBean(String name) throws Exception;
-     void registerBeanDefinition(String name,BeanDefinition beanDefinition) throws Exception;
 }

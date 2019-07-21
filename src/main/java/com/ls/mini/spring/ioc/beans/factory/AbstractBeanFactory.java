@@ -1,6 +1,6 @@
-package com.ls.mini.spring.ioc.factory;
+package com.ls.mini.spring.ioc.beans.factory;
 
-import com.ls.mini.spring.ioc.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.BeanDefinition;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,13 +44,8 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         return bean;
     }
 
-    /**
-     * 上一个版本v4在注册的时候进行对象bean的创建，现在把创建实例可以延迟到获取的时候再进行创建
-     * @param name
-     * @param beanDefinition
-     * @throws Exception
-     */
-    @Override
+
+    //注册bean的接口保留在这里
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
         beanDefinitionMap.put(name, beanDefinition);
         beanDefinitionNames.add(name);

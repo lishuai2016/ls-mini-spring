@@ -1,6 +1,6 @@
-package com.ls.mini.spring.ioc;
+package com.ls.mini.spring.ioc.beans;
 
-import com.ls.mini.spring.ioc.io.ResourceLoader;
+import com.ls.mini.spring.ioc.beans.io.ResourceLoader;
 
 import java.util.HashMap;
 import java.util.Map;

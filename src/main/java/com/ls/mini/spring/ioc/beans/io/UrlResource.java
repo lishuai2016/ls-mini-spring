@@ -1,4 +1,4 @@
-package com.ls.mini.spring.ioc.io;
+package com.ls.mini.spring.ioc.beans.io;
 
 import java.io.IOException;
 import java.io.InputStream;

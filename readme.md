@@ -79,3 +79,13 @@
 
 这里的解决方式是，在通过类构建实例的时候，还没有初始化属性时，把bean对象设置到BeanDefinition中，
 这样出现依赖的对象之间获得对方的实例，不是完全的属性也初始化完毕，这样就避免了循环依赖的问题。
+
+
+> v6
+
+调整包结构
+
+新增接口ApplicationContext、AbstractApplicationContext、ClassPathXmlApplicationContext
+
+
+

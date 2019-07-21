@@ -1,11 +1,10 @@
-package com.ls.mini.spring.ioc.xml;
+package com.ls.mini.spring.ioc.beans.xml;
 
-import com.ls.mini.spring.ioc.AbstractBeanDefinitionReader;
-import com.ls.mini.spring.ioc.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.AbstractBeanDefinitionReader;
+import com.ls.mini.spring.ioc.beans.BeanDefinition;
 import com.ls.mini.spring.ioc.BeanReference;
-import com.ls.mini.spring.ioc.PropertyValue;
-import com.ls.mini.spring.ioc.io.Resource;
-import com.ls.mini.spring.ioc.io.ResourceLoader;
+import com.ls.mini.spring.ioc.beans.PropertyValue;
+import com.ls.mini.spring.ioc.beans.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

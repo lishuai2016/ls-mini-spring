@@ -1,7 +1,8 @@
-package com.ls.mini.spring.ioc.xml;
+package com.ls.mini.spring.ioc.beans.xml;
 
-import com.ls.mini.spring.ioc.BeanDefinition;
-import com.ls.mini.spring.ioc.io.ResourceLoader;
+import com.ls.mini.spring.ioc.beans.BeanDefinition;
+import com.ls.mini.spring.ioc.beans.io.ResourceLoader;
+import com.ls.mini.spring.ioc.beans.xml.XmlBeanDefinitionReader;
 import org.junit.Assert;
 import org.junit.Test;
 
