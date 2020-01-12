@@ -12,11 +12,11 @@ import java.lang.reflect.Method;
  */
 public class ReflectiveMethodInvocation implements MethodInvocation {
 
-    private Object target;
+    protected Object target;//把private改成protected，让子类可以访问
 
-    private Method method;
+    protected Method method;
 
-    private Object[] args;
+    protected Object[] args;
 
     public ReflectiveMethodInvocation(Object target, Method method, Object[] args) {
         this.target = target;

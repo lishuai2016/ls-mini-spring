@@ -42,13 +42,14 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         Object bean = beanDefinition.getBean();//在这里没有实力话，再进行实例的创建
         if (bean == null) {
             bean = doCreateBean(beanDefinition);//创建一个bean实例，并设置bean的属性字段
-            initializeBean(bean,name);//对bean进行初始化处理
+            bean = initializeBean(bean,name);//对bean进行初始化处理【这里可能有问题，需要用代理生成后的对象bean，替换，否则容易造成切面advice不生效】
+            beanDefinition.setBean(bean);//在这里有可能对象为代理的对象，需要更新原来变量的内容
         }
         return bean;
     }
 
-    //
-    protected void initializeBean(Object bean, String name) throws Exception {
+    //  这里需要返回代理类包装后的对象，在容器的map中替换掉包装前的bean对象，否则，若这里返回的对象不是代理生成的对象，那这里肯定有问题
+    protected Object initializeBean(Object bean, String name) throws Exception {
         for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
             bean = beanPostProcessor.postProcessBeforeInitialization(bean, name);
         }
@@ -57,6 +58,7 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
             bean = beanPostProcessor.postProcessAfterInitialization(bean, name);
         }
+        return bean;
     }
 
     //注册bean的接口保留在这里

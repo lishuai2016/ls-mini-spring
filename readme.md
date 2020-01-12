@@ -105,11 +105,13 @@
 接入BeanPostProcessor 初始化扩展接口以及通过expressin表达式匹配类或者方法的joinpoint
 
 
-> v9:auto-create-aop-proxy
+> v9:auto-create-aop-proxy && invite-cglib-and-aopproxy-factory
+
+实现了通过xml配置【类似于spring配置aop切面】方式，实现自动创建aop逻辑，包含jdk动态代理和cglib动态代理
 
 
+> v10、支持通过注解来实现aop
+
+//todo
 
 
-
-
-> V10:invite-cglib-and-aopproxy-factory
